@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartBacklog – AI Agile Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #151820;
+      --surface2: #1c2030;
+      --border: #252a3a;
+      --accent: #5b6ef5;
+      --accent2: #a78bfa;
+      --green: #22d3a0;
+      --orange: #f97316;
+      --red: #f43f5e;
+      --yellow: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13,15,20,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .logo span { color: var(--accent2); }
+    .header-actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #4a5de0; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+    /* LAYOUT */
+    .app-body {
+      display: flex;
+      height: calc(100vh - 73px);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      padding: 20px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 4px;
+    }
+    .sprint-card {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 8px;
+    }
+    .sprint-card:hover, .sprint-card.active {
+      background: var(--surface2);
+      border-color: var(--accent);
+    }
+    .sprint-card .sprint-name { font-weight: 600; font-size: 0.9rem; }
+    .sprint-card .sprint-meta { font-size: 0.75rem; color: var(--muted); margin-top: 2px; font-family: var(--mono); }
+    .sprint-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+    }
+    .badge-active { background: rgba(34,211,160,0.15); color: var(--green); }
+    .badge-done { background: rgba(100,116,139,0.15); color: var(--muted); }
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      padding: 8px 0;
+    }
+    .stat-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat-value { font-size: 1.4rem; font-weight: 800; }
+    .stat-label { font-size: 0.65rem; color: var(--muted); font-family: var(--mono); }
+    .stat-green { color: var(--green); }
+    .stat-accent { color: var(--accent2); }
+    .stat-orange { color: var(--orange); }
+
+    /* KANBAN */
+    .kanban-wrapper {
+      flex: 1;
+      padding: 24px;
+      overflow-x: auto;
+      overflow-y: auto;
+    }
+    .kanban-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .sprint-title-display {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .sprint-title-display span { color: var(--accent2); }
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      min-height: calc(100vh - 200px);
+      min-width: 700px;
+    }
+    .column {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 300px;
+    }
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .column-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    .col-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .col-dot-todo { background: var(--muted); }
+    .col-dot-inprogress { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+    .col-dot-done { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .col-count {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .add-ticket-btn {
+      width: 100%;
+      padding: 8px;
+      background: transparent;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .add-ticket-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* TICKET CARD */
+    .ticket {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .ticket:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(91,110,245,0.15);
+    }
+    .ticket-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .ticket-id {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .ticket-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      flex: 1;
+    }
+    .ticket-actions {
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .ticket:hover .ticket-actions { opacity: 1; }
+    .icon-btn {
+      width: 24px; height: 24px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      transition: all 0.1s;
+    }
+    .icon-btn-edit { background: rgba(91,110,245,0.2); color: var(--accent); }
+    .icon-btn-edit:hover { background: var(--accent); color: #fff; }
+    .icon-btn-delete { background: rgba(244,63,94,0.2); color: var(--red); }
+    .icon-btn-delete:hover { background: var(--red); color: #fff; }
+    .ticket-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 6px 0;
+      line-height: 1.4;
+    }
+    .ticket-footer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .tag-priority-high { background: rgba(244,63,94,0.15); color: var(--red); }
+    .tag-priority-medium { background: rgba(251,191,36,0.15); color: var(--yellow); }
+    .tag-priority-low { background: rgba(34,211,160,0.15); color: var(--green); }
+    .tag-points {
+      background: rgba(167,139,250,0.15);
+      color: var(--accent2);
+      margin-left: auto;
+    }
+    .ai-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-family: var(--mono);
+      color: var(--accent2);
+      background: rgba(167,139,250,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .ai-dot {
+      width: 5px; height: 5px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      width: 560px;
+      max-width: 95vw;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-family: var(--mono);
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .form-textarea { min-height: 80px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+    /* AI PANEL */
+    .ai-panel {
+      background: linear-gradient(135deg, rgba(91,110,245,0.05), rgba(167,139,250,0.05));
+      border: 1px solid rgba(91,110,245,0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .ai-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .ai-panel-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent2);
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--mono);
+    }
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .point-chip {
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .point-chip.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .ai-generate-btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .ai-generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* NOTIFICATIONS */
+    .notif {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      z-index: 300;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .notif-success { border-left: 3px solid var(--green); }
+    .notif-ai { border-left: 3px solid var(--accent2); }
+
+    .criteria-list { list-style: none; }
+    .criteria-list li {
+      padding: 8px 12px;
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      margin-bottom: 6px;
+      font-size: 0.83rem;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// --- SIMULATION IA (Pour éviter l'erreur CORS Anthropic) ---
+const simulateAI = (type, title) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (type === 'criteria') {
+        resolve({ criteria: [
+          `L'interface permet de saisir ${title}`,
+          `La validation des données est effectuée`,
+          `Le système enregistre les modifications en base`,
+          `Un message de succès est affiché à l'utilisateur`,
+          `Le design respecte la charte graphique`
+        ]});
+      } else if (type === 'points') {
+        resolve({ points: 5, justification: "Complexité moyenne nécessitant des tests unitaires." });
+      } else {
+        resolve({ priority: "medium", reason: "Ticket standard pour le backlog.", isBlocking: false });
+      }
+    }, 1000);
+  });
+};
+
+const INITIAL_DATA = {
+  sprints: [
+    { id: 's1', name: 'Sprint 1 – MVP', status: 'done', goal: 'Livrer le tableau Kanban' },
+    { id: 's2', name: 'Sprint 2 – IA', status: 'active', goal: 'Intégrer l\'IA Agile' }
+  ],
+  tickets: [
+    { id: 'SB-001', title: 'Tableau Kanban', status: 'done', sprintId: 's1', priority: 'high', points: 3, criteria: [], aiEnhanced: true },
+    { id: 'SB-003', title: 'Auto-génération', status: 'inprogress', sprintId: 's2', priority: 'high', points: 8, criteria: [], aiEnhanced: true }
+  ]
+};
+
+// --- COMPONENTS ---
+
+function Notification({ msg, onClose }) {
+  useEffect(() => {
+    const t = setTimeout(onClose, 3000);
+    return () => clearTimeout(t);
+  }, [onClose]);
+  return (
+    <div className={`notif ${msg.type === 'ai' ? 'notif-ai' : 'notif-success'}`}>
+      <span>{msg.type === 'ai' ? '🤖' : '✅'}</span>
+      <span>{msg.text}</span>
+    </div>
+  );
+}
+
+function TicketCard({ ticket, onEdit, onDelete, onView }) {
+  const priorityClass = `tag-priority-${ticket.priority}`;
+  return (
+    <div className="ticket" onClick={() => onView(ticket)}>
+      <div className="ticket-top">
+        <div style={{flex:1}}>
+          <div className="ticket-id">{ticket.id}</div>
+          <div className="ticket-title">{ticket.title}</div>
+        </div>
+        <div className="ticket-actions" onClick={e => e.stopPropagation()}>
+          <button className="icon-btn icon-btn-edit" onClick={() => onEdit(ticket)}>✏️</button>
+          <button className="icon-btn icon-btn-delete" onClick={() => onDelete(ticket.id)}>🗑️</button>
+        </div>
+      </div>
+      <div className="ticket-footer">
+        <span className={`tag ${priorityClass}`}>{ticket.priority}</span>
+        {ticket.aiEnhanced && <span className="ai-badge"><span className="ai-dot"></span>IA</span>}
+        {ticket.points && <span className="tag tag-points">{ticket.points} pts</span>}
+      </div>
+    </div>
+  );
+}
+
+function Column({ title, status, dotClass, tickets, onAdd, onEdit, onDelete, onView }) {
+  return (
+    <div className="column">
+      <div className="column-header">
+        <div className="column-title"><span className={`col-dot ${dotClass}`}></span>{title}</div>
+        <span className="col-count">{tickets.length}</span>
+      </div>
+      {tickets.map(t => <TicketCard key={t.id} ticket={t} onEdit={onEdit} onDelete={onDelete} onView={onView} />)}
+      <button className="add-ticket-btn" onClick={() => onAdd(status)}>＋ Ajouter</button>
+    </div>
+  );
+}
+
+function TicketModal({ ticket, sprintId, onSave, onClose }) {
+  const [form, setForm] = useState({
+    title: ticket?.title || '',
+    description: ticket?.description || '',
+    status: ticket?.status || 'todo',
+    priority: ticket?.priority || 'medium',
+    points: ticket?.points || '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [aiCriteria, setAiCriteria] = useState(ticket?.criteria || []);
+
+  const handleAI = async (type) => {
+    setLoading(true);
+    const res = await simulateAI(type, form.title);
+    if (res.criteria) setAiCriteria(res.criteria);
+    if (res.points) setForm(f => ({...f, points: res.points}));
+    if (res.priority) setForm(f => ({...f, priority: res.priority}));
+    setLoading(false);
+  };
+
+  return (
+    <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal">
+        <h3>{ticket ? 'Modifier' : 'Nouveau'} Ticket</h3>
+        <div className="form-group">
+          <label className="form-label">Titre</label>
+          <input className="form-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
+        </div>
+        <div className="ai-panel">
+          <div className="ai-panel-title">🤖 Assistant IA</div>
+          <div style={{display:'flex', gap: 8, marginTop: 10}}>
+             <button className="ai-generate-btn" onClick={() => handleAI('criteria')} disabled={loading}>Critères</button>
+             <button className="ai-generate-btn" onClick={() => handleAI('points')} disabled={loading}>Points</button>
+          </div>
+          {aiCriteria.length > 0 && (
+            <ul className="criteria-list" style={{marginTop: 10}}>
+              {aiCriteria.map((c, i) => <li key={i}>{c}</li>)}
+            </ul>
+          )}
+        </div>
+        <div className="modal-actions">
+          <button className="btn btn-ghost" onClick={onClose}>Annuler</button>
+          <button className="btn btn-primary" onClick={() => onSave({...form, criteria: aiCriteria, id: ticket?.id || `SB-${Date.now()}`, sprintId})}>Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(INITIAL_DATA);
+  const [activeSprint, setActiveSprint] = useState('s2');
+  const [showModal, setShowModal] = useState(false);
+  const [editTicket, setEditTicket] = useState(null);
+  const [notif, setNotif] = useState(null);
+
+  const handleSave = (ticket) => {
+    setData(d => {
+      const exists = d.tickets.find(t => t.id === ticket.id);
+      return { ...d, tickets: exists ? d.tickets.map(t => t.id === ticket.id ? ticket : t) : [...d.tickets, ticket] };
+    });
+    setShowModal(false);
+    setNotif({ text: "Ticket mis à jour !", type: "success" });
+  };
+
+  const sprintTickets = data.tickets.filter(t => t.sprintId === activeSprint);
+
+  return (
+    <>
+      <header>
+        <div className="logo"><div className="logo-icon">⚡</div>Smart<span>Backlog</span></div>
+        <button className="btn btn-primary" onClick={() => { setEditTicket(null); setShowModal(true); }}>＋ Nouveau</button>
+      </header>
+      <div className="app-body">
+        <aside className="sidebar">
+          <div className="sidebar-title">Sprints</div>
+          {data.sprints.map(s => (
+            <div key={s.id} className={`sprint-card ${s.id === activeSprint ? 'active' : ''}`} onClick={() => setActiveSprint(s.id)}>
+              <div className="sprint-name">{s.name}</div>
+            </div>
+          ))}
+        </aside>
+        <main className="kanban-wrapper">
+          <div className="kanban-board">
+            <Column title="To Do" status="todo" dotClass="col-dot-todo" tickets={sprintTickets.filter(t => t.status === 'todo')} onAdd={() => setShowModal(true)} onEdit={(t) => { setEditTicket(t); setShowModal(true); }} onDelete={(id) => setData({...data, tickets: data.tickets.filter(t => t.id !== id)})} onView={()=>{}} />
+            <Column title="In Progress" status="inprogress" dotClass="col-dot-inprogress" tickets={sprintTickets.filter(t => t.status === 'inprogress')} onAdd={() => setShowModal(true)} onEdit={(t) => { setEditTicket(t); setShowModal(true); }} onDelete={(id) => setData({...data, tickets: data.tickets.filter(t => t.id !== id)})} onView={()=>{}} />
+            <Column title="Done" status="done" dotClass="col-dot-done" tickets={sprintTickets.filter(t => t.status === 'done')} onAdd={() => setShowModal(true)} onEdit={(t) => { setEditTicket(t); setShowModal(true); }} onDelete={(id) => setData({...data, tickets: data.tickets.filter(t => t.id !== id)})} onView={()=>{}} />
+          </div>
+        </main>
+      </div>
+      {showModal && <TicketModal ticket={editTicket} sprintId={activeSprint} onSave={handleSave} onClose={() => setShowModal(false)} />}
+      {notif && <Notification msg={notif} onClose={() => setNotif(null)} />}
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
