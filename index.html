@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>SmartBacklog — Gestion de Projets Agile</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     PAGE LOGIN
+══════════════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="lp-bg">
+    <div class="lp-glow lp-glow-1"></div>
+    <div class="lp-glow lp-glow-2"></div>
+    <div class="lp-glow lp-glow-3"></div>
+    <svg class="lp-circuit" viewBox="0 0 1400 900" preserveAspectRatio="none">
+      <path d="M100,200 Q300,150 400,300 T700,250" stroke="rgba(34,197,94,.12)" stroke-width="1.5" fill="none"/>
+      <path d="M0,500 Q200,450 350,550 T600,480 T900,520" stroke="rgba(34,197,94,.08)" stroke-width="1" fill="none"/>
+      <path d="M600,100 Q750,200 800,350 T850,600" stroke="rgba(163,230,53,.07)" stroke-width="1" fill="none"/>
+      <circle cx="400" cy="300" r="3" fill="rgba(34,197,94,.4)"/>
+      <circle cx="700" cy="250" r="2" fill="rgba(34,197,94,.3)"/>
+      <circle cx="850" cy="600" r="3" fill="rgba(163,230,53,.35)"/>
+    </svg>
+  </div>
+  <div class="lp-wrap">
+    <!-- Colonne gauche -->
+    <div class="lp-left">
+      <div class="lp-brand">
+        <div class="lp-sb-logo">
+          <span class="lp-sb-s">S</span><span class="lp-sb-b">B</span>
+          <div class="lp-sb-bolt">✦</div>
+        </div>
+        <div class="lp-brand-name">
+          <span class="lp-brand-smart">Smart</span>
+          <span class="lp-brand-backlog">Backlog</span>
+        </div>
+      </div>
+      <div class="lp-app-mockup">
+        <div class="lp-sidebar">
+          <div class="lp-sb-item lp-sb-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+          <div class="lp-sb-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+          <div class="lp-sb-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="lp-sb-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="lp-sb-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg></div>
+        </div>
+        <div class="lp-app-content">
+          <div class="lp-app-title">Backlog</div>
+          <div class="lp-mini-board">
+            <div class="lp-mini-col">
+              <div class="lp-mini-colhead">À faire <span class="lp-mini-badge">12</span></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#818cf8;width:65%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#22c55e;width:50%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#22c55e;width:75%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#818cf8;width:40%"></div><div class="lp-mc-dot"></div></div>
+            </div>
+            <div class="lp-mini-col">
+              <div class="lp-mini-colhead">En cours <span class="lp-mini-badge lp-mb-y">5</span></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#38bdf8;width:60%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#facc15;width:45%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#fb923c;width:55%"></div><div class="lp-mc-line"></div></div>
+            </div>
+            <div class="lp-mini-col">
+              <div class="lp-mini-colhead">En revue <span class="lp-mini-badge lp-mb-o">3</span></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#f472b6;width:60%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#22c55e;width:40%"></div><div class="lp-mc-dot"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#38bdf8;width:50%"></div><div class="lp-mc-line"></div></div>
+            </div>
+            <div class="lp-mini-col">
+              <div class="lp-mini-colhead">Terminé <span class="lp-mini-badge lp-mb-g">8</span></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#22c55e;width:70%"></div><div class="lp-mc-line"></div></div>
+              <div class="lp-mini-card"><div class="lp-mc-bar" style="background:#22c55e;width:55%"></div><div class="lp-mc-line"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-float-badge">
+          <div class="lp-fb-label">Avancement du projet</div>
+          <div class="lp-fb-value">+ 28%</div>
+          <svg viewBox="0 0 120 36" width="120" height="36" fill="none">
+            <polyline points="0,34 18,28 36,22 54,15 72,10 90,6 108,3 120,1" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="0,34 18,28 36,22 54,15 72,10 90,6 108,3 120,1 120,36 0,36" fill="rgba(34,197,94,.08)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="lp-icon-3d">
+        <div class="lp-icon-3d-inner">
+          <span class="lp-sb-s">S</span><span class="lp-sb-b">B</span>
+          <div class="lp-sb-bolt lp-sb-bolt-sm">✦</div>
+        </div>
+        <div class="lp-icon-glow-ring"></div>
+      </div>
+    </div>
+    <!-- Colonne droite : carte formulaire -->
+    <div class="lp-right">
+      <div class="lp-card">
+        <div class="lp-card-header">
+          <div class="lp-card-logo-box">
+            <span class="lp-sb-s lp-sb-sm">S</span><span class="lp-sb-b lp-sb-sm">B</span>
+            <div class="lp-sb-bolt lp-sb-bolt-xs">✦</div>
+          </div>
+          <div>
+            <div class="lp-card-title">Smart <span class="lp-ct-green">Backlog</span></div>
+            <div class="lp-card-sub">Gestionnaire de projets Agile avec IA</div>
+          </div>
+        </div>
+        <div class="lp-tabs">
+          <button class="lp-tab active" id="tab-login" onclick="switchAuthTab('login')">Connexion</button>
+          <button class="lp-tab" id="tab-register" onclick="switchAuthTab('register')">Inscription</button>
+        </div>
+        <div class="auth-error" id="auth-error" style="display:none;"></div>
+        <!-- LOGIN -->
+        <div id="form-login">
+          <div class="lp-form-intro"><h2>Bon retour 👋</h2><p>Connectez-vous à votre espace Agile</p></div>
+          <div class="lp-field">
+            <label class="lp-label">Identifiant</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <input class="lp-input" type="text" id="login-id" placeholder="Nom d'utilisateur ou e-mail" autocomplete="username"/>
+            </div>
+          </div>
+          <div class="lp-field">
+            <label class="lp-label">Mot de passe</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <input class="lp-input" type="password" id="login-pwd" placeholder="••••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+              <button class="lp-eye" type="button" onclick="togglePwd('login-pwd',this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+          </div>
+          <button class="lp-btn-connect" onclick="doLogin()">Se connecter →</button>
+          <p class="lp-switch">Pas encore de compte ? <a onclick="switchAuthTab('register')">Créer un compte</a></p>
+        </div>
+        <!-- REGISTER -->
+        <div id="form-register" style="display:none;">
+          <div class="lp-form-intro"><h2>Créer un compte ✨</h2><p>Rejoignez SmartBacklog</p></div>
+          <div class="lp-field">
+            <label class="lp-label">Nom d'utilisateur</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <input class="lp-input" type="text" id="reg-username" placeholder="ex : alice_dev"/>
+            </div>
+            <span class="lp-hint">Minimum 3 caractères</span>
+          </div>
+          <div class="lp-field">
+            <label class="lp-label">Adresse e-mail</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+              <input class="lp-input" type="email" id="reg-email" placeholder="alice@exemple.com"/>
+            </div>
+          </div>
+          <div class="lp-field">
+            <label class="lp-label">Mot de passe</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <input class="lp-input" type="password" id="reg-pwd" placeholder="Minimum 8 caractères" oninput="checkPwdStrength(this.value)"/>
+              <button class="lp-eye" type="button" onclick="togglePwd('reg-pwd',this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <div class="pwd-strength-bars"><div class="psb" id="psb1"></div><div class="psb" id="psb2"></div><div class="psb" id="psb3"></div><div class="psb" id="psb4"></div></div>
+            <span class="pwd-strength-label" id="pwd-strength-label"></span>
+          </div>
+          <div class="lp-field">
+            <label class="lp-label">Confirmer le mot de passe</label>
+            <div class="lp-input-wrap">
+              <span class="lp-input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <input class="lp-input" type="password" id="reg-confirm" placeholder="Répétez le mot de passe"/>
+              <button class="lp-eye" type="button" onclick="togglePwd('reg-confirm',this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+          </div>
+          <button class="lp-btn-connect" onclick="doRegister()">Créer mon compte ✨</button>
+          <p class="lp-switch">Déjà un compte ? <a onclick="switchAuthTab('login')">Se connecter</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="lp-footer">🔒 Sécurisé et confidentiel · SmartBacklog © 2024 · Tous droits réservés</footer>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE DASHBOARD
+══════════════════════════════════════════════════ -->
+<div id="page-dashboard" class="page">
+  <!-- Fond animé commun aux pages internes -->
+  <div class="app-bg">
+    <div class="app-bg-wave"></div>
+    <svg class="app-bg-svg" viewBox="0 0 1400 900" preserveAspectRatio="none">
+      <path d="M-100,600 Q300,400 700,550 T1500,480" stroke="rgba(34,197,94,.08)" stroke-width="2" fill="none"/>
+      <path d="M-100,700 Q400,500 800,650 T1500,580" stroke="rgba(34,197,94,.06)" stroke-width="1.5" fill="none"/>
+      <circle cx="240" cy="620" r="3" fill="rgba(34,197,94,.3)"/>
+      <circle cx="560" cy="560" r="2" fill="rgba(34,197,94,.2)"/>
+      <circle cx="980" cy="640" r="2.5" fill="rgba(34,197,94,.25)"/>
+      <circle cx="1180" cy="700" r="2" fill="rgba(163,230,53,.2)"/>
+    </svg>
+  </div>
+
+  <!-- Layout : sidebar + contenu -->
+  <div class="db-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="db-sidebar">
+      <!-- Logo -->
+      <div class="db-logo">
+        <div class="db-logo-icon">
+          <span class="lp-sb-s" style="font-size:1.1rem">S</span><span class="lp-sb-b" style="font-size:1.1rem">B</span>
+          <div style="position:absolute;bottom:2px;right:3px;font-size:.45rem;color:#22c55e">✦</div>
+        </div>
+        <div>
+          <div class="db-logo-name">Smart <span style="color:#22c55e">Backlog</span></div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="db-nav">
+        <button class="db-nav-item db-nav-active" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Mes Projets
+        </button>
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Tableau de bord
+        </button>
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Tâches
+        </button>
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Calendrier
+        </button>
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Rapports
+        </button>
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+          Paramètres
+        </button>
+      </nav>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="db-main">
+
+      <!-- Header top -->
+      <header class="db-header">
+        <!-- Barre de recherche -->
+        <div class="db-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher un projet..." class="db-search-input"/>
+          <span class="db-search-kbd">Ctrl K</span>
+        </div>
+        <div class="db-header-right">
+          <!-- Thème -->
+          <button class="db-hdr-btn" onclick="toggleTheme()" title="Thème">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          </button>
+          <!-- Avatar utilisateur -->
+          <div class="db-user-chip">
+            <div class="db-user-av" id="hdr-av">AB</div>
+            <span id="hdr-name">utilisateur</span>
+          </div>
+          <!-- Déconnexion -->
+          <button class="db-logout-btn" onclick="doLogout()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Déconnexion
+          </button>
+        </div>
+      </header>
+
+      <!-- Corps du dashboard -->
+      <div class="db-body">
+        <div class="db-page-hdr">
+          <div>
+            <h1 class="db-page-title">Mes Projets</h1>
+            <p class="db-page-sub" id="dash-subtitle">0 projet en cours</p>
+          </div>
+          <button class="db-btn-new" onclick="openNewProjectModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouveau projet
+          </button>
+        </div>
+
+        <!-- Liste des projets -->
+        <div id="projects-grid" class="db-projects-list"></div>
+      </div>
+
+    </div><!-- /db-main -->
+  </div><!-- /db-layout -->
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE KANBAN
+══════════════════════════════════════════════════ -->
+<div id="page-kanban" class="page">
+  <div class="app-bg">
+    <div class="app-bg-wave"></div>
+  </div>
+  <div class="db-layout">
+    <!-- Sidebar Kanban -->
+    <aside class="db-sidebar">
+      <div class="db-logo">
+        <div class="db-logo-icon">
+          <span class="lp-sb-s" style="font-size:1.1rem">S</span><span class="lp-sb-b" style="font-size:1.1rem">B</span>
+          <div style="position:absolute;bottom:2px;right:3px;font-size:.45rem;color:#22c55e">✦</div>
+        </div>
+        <div><div class="db-logo-name">Smart <span style="color:#22c55e">Backlog</span></div></div>
+      </div>
+      <nav class="db-nav">
+        <button class="db-nav-item" onclick="goTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Mes Projets
+        </button>
+        <button class="db-nav-item db-nav-active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Tableau de bord
+        </button>
+        <button class="db-nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Tâches</button>
+        <button class="db-nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendrier</button>
+        <button class="db-nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Rapports</button>
+        <button class="db-nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Paramètres</button>
+      </nav>
+    </aside>
+
+    <div class="db-main">
+      <header class="db-header">
+        <div class="db-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher..." class="db-search-input"/>
+        </div>
+        <div class="db-header-right">
+          <button class="db-hdr-btn" onclick="toggleTheme()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          </button>
+          <div class="db-user-chip"><div class="db-user-av" id="kb-av">AB</div><span id="kb-name">utilisateur</span></div>
+          <button class="db-logout-btn" onclick="doLogout()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Déconnexion
+          </button>
+        </div>
+      </header>
+
+      <!-- Sous-header kanban -->
+      <div class="kb-subhdr">
+        <div class="kb-breadcrumb">
+          <button class="kb-bc-link" onclick="goTo('dashboard')">Projets</button>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span id="kb-project-name" style="color:var(--text)">Projet</span>
+        </div>
+        <div class="kb-title-row">
+          <div>
+            <h2 class="kb-proj-title" id="kb-title">Projet</h2>
+            <p class="kb-proj-desc" id="kb-desc"></p>
+          </div>
+          <div class="kb-actions">
+            <button class="db-btn-new" onclick="openNewTaskModal('backlog')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nouvelle tâche
+            </button>
+            <button class="db-btn-secondary" onclick="openEditProject()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Modifier
+            </button>
+          </div>
+        </div>
+        <div class="kb-stats" id="kb-stats"></div>
+      </div>
+
+      <!-- Workspace kanban -->
+      <div class="kanban-workspace">
+        <!-- Backlog -->
+        <div class="backlog-panel">
+          <div class="backlog-head">
+            <div class="backlog-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+              Backlog
+            </div>
+            <span class="col-cnt" id="backlog-cnt">0</span>
+          </div>
+          <div class="backlog-tip">Glissez les tickets vers les colonnes →</div>
+          <div class="col-tasks backlog-tasks" id="backlog-col"
+               ondragover="onDragOver(event,'backlog')"
+               ondrop="onDrop(event,'backlog')"
+               ondragleave="onDragLeave(event)"></div>
+          <button class="col-add-btn" onclick="openNewTaskModal('backlog')">+ Ajouter au backlog</button>
+        </div>
+        <!-- Board -->
+        <div class="kanban-board" id="kanban-board"></div>
+      </div>
+
+    </div><!-- /db-main kanban -->
+  </div><!-- /db-layout kanban -->
+</div>
+
+<!-- ══════════════ MODALS ══════════════ -->
+<div class="modal-overlay" id="modal-project" onclick="closeModalOutside(event,'modal-project')">
+  <div class="modal-box">
+    <div class="modal-header"><h3 id="modal-project-title">Nouveau projet</h3><button class="modal-close" onclick="closeModal('modal-project')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-project-id"/>
+      <div class="lp-field"><label class="lp-label">Nom du projet *</label><div class="lp-input-wrap"><input class="lp-input" style="padding-left:14px" type="text" id="proj-name" placeholder="ex : Application e-commerce" maxlength="80"/></div></div>
+      <div class="lp-field"><label class="lp-label">Description</label><div class="lp-input-wrap"><textarea class="lp-input" style="padding-left:14px;min-height:80px;resize:vertical" id="proj-desc" placeholder="Objectifs et contexte…"></textarea></div></div>
+    </div>
+    <div class="modal-footer"><button class="db-btn-secondary" onclick="closeModal('modal-project')">Annuler</button><button class="db-btn-new" id="btn-save-project" onclick="saveProject()">Créer le projet</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-task" onclick="closeModalOutside(event,'modal-task')">
+  <div class="modal-box modal-box-wide">
+    <div class="modal-header"><h3 id="modal-task-title">Nouvelle tâche</h3><button class="modal-close" onclick="closeModal('modal-task')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-body modal-body-grid">
+      <div class="modal-col">
+        <input type="hidden" id="edit-task-id"/>
+        <div class="lp-field"><label class="lp-label">Titre *</label><div class="lp-input-wrap"><input class="lp-input" style="padding-left:14px" type="text" id="task-title" placeholder="ex : Page de connexion" maxlength="150"/></div></div>
+        <div class="lp-field"><label class="lp-label">Description</label><div class="lp-input-wrap"><textarea class="lp-input" style="padding-left:14px;min-height:70px;resize:vertical" id="task-desc" placeholder="En tant que [utilisateur]…"></textarea></div></div>
+        <div class="field-row">
+          <div class="lp-field"><label class="lp-label">Colonne</label><select class="lp-input" style="padding-left:14px" id="task-status"><option value="backlog">📋 Backlog</option><option value="todo">📝 To Do</option><option value="inprogress">⚙️ In Progress</option><option value="done">✅ Done</option></select></div>
+          <div class="lp-field"><label class="lp-label">Priorité</label><select class="lp-input" style="padding-left:14px" id="task-priority"><option value="high">🔴 Haute</option><option value="medium" selected>🟡 Moyenne</option><option value="low">🟢 Basse</option></select></div>
+        </div>
+        <div class="lp-field"><label class="lp-label">Story Points <span style="text-transform:none;font-family:inherit;letter-spacing:0">(Fibonacci)</span></label><select class="lp-input" style="padding-left:14px" id="task-sp"><option value="">— Non estimé</option><option value="1">1 pt</option><option value="2">2 pts</option><option value="3">3 pts</option><option value="5">5 pts</option><option value="8">8 pts</option><option value="13">13 pts</option></select></div>
+      </div>
+      <div class="modal-col ai-col">
+        <div class="ai-panel">
+          <div class="ai-panel-head"><span class="ai-panel-title">🤖 Coach Agile IA<div class="ai-spinner" id="ai-spinner"></div></span><span class="ai-panel-sub">OpenAI GPT-4o</span></div>
+          <div class="ai-key-warn" id="ai-key-warn" style="display:none;">⚠️ Clé API manquante dans <code>app.js</code>.</div>
+          <button class="ai-gen-btn" id="ai-gen-btn" onclick="aiAnalyze()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Analyser avec l'IA</button>
+          <p class="ai-status" id="ai-status">Renseignez le titre puis cliquez sur Analyser.</p>
+          <div class="ai-results" id="ai-results" style="display:none;"><div class="ai-result-item"><span class="air-label">Story Points</span><span class="air-value" id="air-sp">—</span></div><div class="ai-result-item"><span class="air-label">Priorité IA</span><span class="air-value" id="air-prio">—</span></div></div>
+          <p class="ai-prio-text" id="ai-prio-text" style="display:none;"></p>
+          <div class="ai-crit-section" id="ai-crit-section" style="display:none;">
+            <div class="ai-crit-head"><span class="ai-crit-title">📋 Critères d'acceptation</span><button class="ai-crit-add" type="button" onclick="addCriterion()">+ Ajouter</button></div>
+            <div class="crit-list" id="crit-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="db-btn-secondary" onclick="closeModal('modal-task')">Annuler</button><button class="db-btn-new" id="btn-save-task" onclick="saveTask()">Créer la tâche</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-confirm" onclick="closeModalOutside(event,'modal-confirm')">
+  <div class="modal-box modal-box-sm">
+    <div class="modal-header"><h3>Confirmer la suppression</h3><button class="modal-close" onclick="closeModal('modal-confirm')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-body">
+      <div class="confirm-icon">🗑️</div>
+      <p class="confirm-title" id="confirm-title">Supprimer ?</p>
+      <p class="confirm-msg" id="confirm-msg">Cette action est irréversible.</p>
+      <p class="confirm-warn" id="confirm-warn"></p>
+    </div>
+    <div class="modal-footer"><button class="db-btn-secondary" onclick="closeModal('modal-confirm')">Annuler</button><button class="btn-danger" onclick="confirmDelete()">Supprimer</button></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
