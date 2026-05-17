@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ⚡ SmartBacklog — Gestionnaire de Projets Agile
 
 **Projet Final · Ali Boukehila**
@@ -147,3 +148,7 @@ Le `systemPrompt` dans `app.js` configure Claude comme un Coach Agile :
 ---
 
 *SmartBacklog © 2024 — Ali Boukehila · Projet Final*
+=======
+# Smartbacklog
+Application de gestion de projet agile
+>>>>>>> 4812612d5d867e02514684f5c37e4e617efbefe4
